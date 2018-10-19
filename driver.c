@@ -28,12 +28,12 @@ int main(){
   print_list(find);
 
   printf("Looking for first song by Adil...\n");
-  struct song_node *lookfor = find_first(lookfor,"Adil");
+  struct song_node *lookfor = find_first(first,"Adil");
   print_list(lookfor);
 
 
   free_list(first);
-  
+
 
 
 
