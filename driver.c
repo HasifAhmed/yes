@@ -1,7 +1,7 @@
 #include "tunes.h"
 
 int main(){
-  srand(time(NULL));
+  //srand(time(NULL));
 
   struct song_node *song1 = make_song("Hello","Hasif");
   struct song_node *song2 = make_song("Goodbye","Adil");
@@ -14,32 +14,34 @@ int main(){
   struct song_node *first = NULL;
 
   printf("\n=================================================\n");
-  first = insert_order(first,song1);
+  first = insert_order(first,"Hello","Hasif");
   printf("Song Added. Current Song Directory:\n");
   print_list(first);
 
-  first = insert_order(first,song2);
+  first = insert_order(first,"Goodbye","Adil");
   printf("Song Added. Current Song Directory:\n");
   print_list(first);
 
-  first = insert_order(first,song3);
+  first = insert_order(first,"Pakistan","Adil");
   printf("Song Added. Current Song Directory:\n");
   print_list(first);
 
-  first = insert_order(first,song4);
+  first = insert_order(first, "Bangladesh", "Hasif");
   printf("Song Added. Current Song Directory:\n");
   print_list(first);
 
-  first = insert_order(first,song5);
+  first = insert_order(first,"India", "Neither");
   printf("Song Added. Current Song Directory:\n");
   print_list(first);
   printf("\n=================================================\n");
 
   printf("\n=================================================\n");
   printf("Random Song:\n");
-  rand_node(first);
+  struct song_node *r1 = rand_node(first);
+  print_list(r1);
   printf("Another Random Song:\n");
-  rand_node(first);
+  struct song_node *r2 = rand_node(first);
+  print_list(r2);
   printf("\n=================================================\n");
 
   printf("\n=================================================\n");
@@ -56,11 +58,7 @@ int main(){
   print_list(found3);
   printf("\n=================================================\n");
 
-  song1 = make_song("Hello","Hasif");
-  song2 = make_song("Goodbye","Adil");
-  song3 = make_song("Pakistan!","Adil");
-  song4 = make_song("Bangladesh!","Hasif");
-  song5 = make_song("India","Neither");
+
 
   printf("\n=================================================\n");
   printf("Current Song Directory:\n");
