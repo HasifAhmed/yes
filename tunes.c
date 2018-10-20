@@ -1,4 +1,5 @@
 #include "tunes.h"
+struct song_node *lib[27];
 
 int indexOf(char * artist){
   int i=artist[0];
@@ -14,5 +15,5 @@ int indexOf(char * artist){
 void add_song(char * name,char *artist){
   int i=indexOf(artist);
   struct song_node * song = make_song(name,artist);
-   
+
 }

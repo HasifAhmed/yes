@@ -9,7 +9,7 @@ struct song_node{
   struct song_node *next;
 };
 
-struct song_node * table[27];
+
 
 struct song_node * make_song(char * n, char * a);
 

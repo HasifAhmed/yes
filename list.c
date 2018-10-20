@@ -51,34 +51,7 @@ struct song_node * free_list(struct song_node *p){
 	return NULL;
 }
 
-struct song_node * insert_order(struct song_node *p, char *song, char *a){
-  struct song_node *new = malloc(sizeof(struct song_node));
-	strcpy(new->name, song);
-	strcpy(new->artist, a);
 
-  struct song_node *iter = malloc(sizeof(struct song_node));
-  iter = p;
-
-	if(!iter){
-		return new;
-	}
-
-  if(strcmp(a, iter->artist) < 0 || (strcmp(a, iter->artist) == 0 && strcmp(song, iter->name) < 0)){
-   new->next = iter;
-   return new;
- }
-
- struct song_node *bef = malloc(sizeof(struct song_node));
- bef = p;
-
- while(iter  && (strcmp(a, iter->artist)>0 || (strcmp(a, iter->artist)==0 && strcmp(song, iter->name) > 0))){
-  bef = iter;
-  iter = iter -> next;
- }
- new->next = iter;
- bef->next = new;
- return p;
-}
 
 struct song_node* find_node(struct song_node *p, char *n, char *a){
   while(p){
@@ -99,7 +72,7 @@ struct song_node * find_first(struct song_node *p, char *a){
 }
 
 struct song_node * rand_node(struct song_node *p){
-  
+
   struct song_node *iter = malloc(sizeof(struct song_node));
   iter = p;
   int cnt = 0;
@@ -136,4 +109,52 @@ struct song_node * remove_node(struct song_node *p, struct song_node *rem){
     iter = iter->next;
   }
   return p;
+}
+
+struct song_node * insert_order(struct song_node * p, struct song_node *new){
+  struct song_node * iter = p;
+  struct song_node * on = p;
+  if(p == NULL){
+    return new;
+  }
+
+  if(strcmp(p -> artist ,new -> artist) > 0){
+    new = insert_front(p,new);
+    return new;
+  }
+   while(iter -> next != NULL){
+    //printf("yes");
+    if(strcmp(iter -> artist ,new -> artist) > 0){
+      new = insert_front(iter,new);
+      on = insert_front(new,on);
+      return on;
+    }
+    //printf("hel");
+    if(strcmp(iter -> artist ,new -> artist) == 0){
+      while(iter -> next != NULL){
+        if(strcmp(iter -> name ,new -> name) > 0){
+          new = insert_front(iter,new);
+          on = insert_front(new,on);
+          return on;
+        }
+        on = iter;
+        iter = iter -> next;
+      }
+      //printf("no");
+      new = insert_front(iter,new);
+      on = insert_front(new,on);
+      return on;
+    }
+   on = iter;
+  iter = iter -> next;
+  }
+   if(strcmp(iter->artist,new->artist) == 0){
+    if(strcmp(iter -> name ,new -> name) > 0){
+      on -> next = new;
+      on = on -> next;
+      on -> next = iter;
+      return p;
+    }
+  }
+  p = insert_back(p,new);
 }
